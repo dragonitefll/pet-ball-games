@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      var colors = [
+        [255, 0, 0],
+        [255, 64, 0],
+        [255, 255, 0],
+        [0, 255, 0],
+        [0, 255, 255],
+        [0, 0, 255],
+        [255, 0, 255]
+      ];
+      var speeds = [
+        [128, -128],
+        [-128, 128],
+        [128, 128],
+        [128, -128],
+        [-128, 128],
+        [-128, -128],
+      ]
+      var i = 0;
+
+      var t = setInterval(function() {
+        if (i > 20) {
+          petball.setAllLEDs(0, 0, 0);
+          petball.showLEDs();
+          petball.stopMotors(true, true);
+          clearInterval(t);
+        } else {
+          var speed = speeds[i % speeds.length];
+          var color = colors[i % colors.length];
+
+          petball.setAllLEDs(color[0], color[1], color[2]);
+          petball.showLEDs();
+          petball.startBothMotors(speed[0], speed[1]);
+
+          i++;
+        }
+      }, 500);
+    </script>
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <iframe style="width: 100vw; height: 100vh; border: none; margin: 0;" src="https://www.youtube.com/embed/PfJl4LGIlL4?autoplay=1&muted=1"></iframe>
+  </body>
+</html>

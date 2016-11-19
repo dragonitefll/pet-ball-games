@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      var colors = [
+        [255, 0, 0],
+        [255, 64, 0],
+        [255, 255, 0],
+        [0, 255, 0],
+        [0, 255, 255],
+        [0, 0, 255],
+        [255, 0, 255]
+      ];
+      var i = 0;
+
+      setInterval(function() {
+        var color = colors[i];
+
+        document.body.style.backgroundColor = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+        petball.setAllLEDs(color[0], color[1], color[2]);
+        petball.showLEDs();
+
+        i++;
+        if (i >= colors.length) {
+          i = 0;
+        }
+      }, 1000);
+    </script>
+  </head>
+  <body style="height: 100%; margin: 0;">
+  </body>
+</html>
