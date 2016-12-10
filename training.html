@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+      var audio = new Audio("sitcookie.mp3");
+
+      window.setTimeout(function() {
+        audio.play();
+        document.getElementById("before").style.display = "block";
+      }, 9000);
+      audio.onended = function() {
+        document.getElementById("before").style.display = "none";
+        document.getElementById("after").style.display = "block";
+        petball.dispenseTreat();
+
+        var colors = [
+          [255, 0, 0],
+          [255, 64, 0],
+          [255, 255, 0],
+          [0, 255, 0],
+          [0, 255, 255],
+          [0, 0, 255],
+          [255, 0, 255]
+        ];
+        var i = 0;
+
+        setInterval(function() {
+          var color = colors[i];
+
+          document.body.style.backgroundColor = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+          petball.setAllLEDs(color[0], color[1], color[2]);
+          petball.showLEDs();
+
+          i++;
+          if (i >= colors.length) {
+            i = 0;
+          }
+        }, 1000);
+      };
+    </script>
+    <style>
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Roboto";
+        color: white;
+      }
+
+      h1 {
+        display: none;
+        font-size: 9em;
+        text-shadow: 0 0 0.1em black;
+      }
+    </style>
+  </head>
+  <body style="background-color: black;">
+    <h1 id="before">Sit, Cookie!</h1>
+    <h1 id="after">Good dog!</h1>
+  </body>
+</html>

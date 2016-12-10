@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+    window.setTimeout(function() {
+      document.getElementById("tennis-ball").style.display = "block";
+      var moveCount = 0;
+      var moveIntervalId = window.setInterval(function() {
+        if (moveCount == 0) {
+          petball.startBothMotors(128, 128);
+        } else if (moveCount == 1) {
+          petball.startBothMotors(-128, -128);
+        } else if (moveCount == 2) {
+          petball.stopMotors(true, true);
+          clearInterval(moveIntervalId);
+        }
+        moveCount++;
+      }, 1500);
+      window.setTimeout(function() {
+        document.getElementById("tennis-ball").style.display = "none";
+
+        window.setTimeout(function() {
+          document.getElementById("game").style.display = "block";
+
+          window.setInterval(function() {
+            var bone = document.getElementById("bone");
+            var game = document.getElementById("game");
+            bone.style.top = Math.random() * game.clientHeight + "px";
+            bone.style.left = Math.random() * game.clientWidth + "px";
+          }, 1000);
+
+          petball.setLaser(false);
+        }, 3000);
+
+        petball.setLaser(true);
+        petball.moveLaser(150);
+
+        var i = 0;
+        window.setInterval(function() {
+          if (i < 4) {
+            if (i % 2 == 0) {
+              petball.moveLaser(110);
+            } else {
+              petball.moveLaser(150);
+            }
+          }
+          i++;
+        }, 500);
+      }, 4000);
+    }, 5000);
+    petball.moveLaser(110);
+    </script>
+    <style>
+    * {
+      margin: 0;
+    }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+    @keyframes tennis-ball {
+      0% {
+        width: 300px;
+      }
+
+      50% {
+        width: 400px;
+      }
+
+      100% {
+        width: 300px;
+      }
+    }
+    </style>
+  </head>
+  <body style="display: flex; justify-content: center; align-items: center; background-color: black;">
+    <img src="Tennis%20Ball.png" id="tennis-ball" style="display: none; animation-name: tennis-ball; animation-duration: 2s; animation-iteration-count: infinite;"/>
+    <div id="game" style="position: relative; display: none; width: 100%; height: 100%; background-color: #795548">
+      <img id="bone" style="display: block; transition: top 1s, left 1s; position: absolute;" src="http://www.drodd.com/images15/bone21.png" />
+    </div>
+  </body>
+</html>

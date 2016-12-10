@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      petball.setLaser(true);
+      function moveLaser() {
+        petball.moveLaser(parseInt(document.getElementById("laser-pos").value));
+      }
+    </script>
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <p>Enter a position for the Pet Ball's laser.</p>
+    <input type="number" id="laser-pos" min="0" max="180" onchange="moveLaser()" style="font-size: 10em;"/>
+  </body>
+</html>
